@@ -1,1 +1,2 @@
-# genai-skills-workshop-shawn-mittal
+# Generative AI Skills Workshop
+Repo for submitting challenges in the GenAI Skills Workshop.
