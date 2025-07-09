@@ -1,4 +1,6 @@
 import requests
+import vertexai
+from vertexai.generative_models import GenerativeModel
 from typing import Dict, Any, Optional, List, Tuple
 
 
@@ -98,3 +100,66 @@ def get_weather_forecast(
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
         return None
+
+
+def is_address_in_us(project_id: str, location: str, user_query: str) -> bool:
+    """Checks if the addresses in a user query are in the United States.
+
+    Args:
+        project_id: The Google Cloud project ID.
+        location: The Google Cloud location (e.g., "us-central1").
+        user_query: The user's query string containing addresses.
+
+    Returns:
+        True if model determines all addresses are in the US, False otherwise.
+    """
+    try:
+        vertexai.init(project=project_id, location=location)
+        model = GenerativeModel("gemini-2.0-flash")
+
+        prompt = (
+            'Are the following addresses in the user query all located in the '
+            'United States of America? Please answer with only the word "yes" '
+            f'or "no". User Query: "{user_query}"'
+        )
+        response = model.generate_content(prompt)
+        text_response = response.text.strip().lower()
+
+        return text_response == 'yes'
+
+    except Exception as e:
+        print(f"An error occurred while checking address location: {e}")
+
+    return False
+
+
+def is_user_query_mean(project_id: str,
+                       location: str, user_query: str) -> bool:
+    """Determines if a user query could be considered malicious or mean.
+
+    Args:
+        project_id: The Google Cloud project ID.
+        location: The Google Cloud location (e.g., "us-central1").
+        user_query: The user's query string.
+
+    Returns:
+        True if the model determines the query is mean, False otherwise.
+    """
+    try:
+        vertexai.init(project=project_id, location=location)
+        model = GenerativeModel("gemini-2.0-flash")
+
+        prompt = (
+            'Could the user query be construed as malicious or mean? '
+            'Please answer with only the word "yes" or "no". User Query: '
+            f'"{user_query}"'
+        )
+        response = model.generate_content(prompt)
+        text_response = response.text.strip().lower()
+
+        return text_response == 'yes'
+
+    except Exception as e:
+        print(f"An error occurred during query safety check: {e}")
+
+    return False
