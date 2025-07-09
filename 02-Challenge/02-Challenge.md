@@ -1,6 +1,9 @@
-# Challenge One
-Create an Agent that uses the National Weather Service API and Google Maps Geocoding API as tools in order to answer weather related queries.
+# Challenge Two
 
-Enhance the agent using callbacks to log user prompts, model responses, and validate user input to ensure non-us locations are not sent.
-
-See 
+1. Make a copy of the Jupyter notebook you created in the previous challenge.
+2. Add callback functions to log both user prompts and model responses.
+3. Add a callback function to validate user input.
+    * Ensure the user’s location is in the United States (the NWS API does not support
+non-US locations).
+    * Ensure the user input is not malicious prior to sending the request to the model.
+4. Upload your notebook to your GitHub repository for grading.
