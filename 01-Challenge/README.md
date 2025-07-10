@@ -1,4 +1,4 @@
-# Challenge 
+# Challenge One
 
 1. Log into the Cloud Skills Boost environment provided by your instructor.
 2. Create a Jupyter Notebook using Vertex AI Colab Enterprise.

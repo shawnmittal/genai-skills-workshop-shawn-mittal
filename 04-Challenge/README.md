@@ -1,4 +1,5 @@
 # Challenge Four
+
 1. Copy of one of your previous Jupyter notebooks to use as a starting point.
 2. Add Greeter, Search, Critique, and Refine agents.
 3. Use either a Sequential or Loop agent to build the answer team.
